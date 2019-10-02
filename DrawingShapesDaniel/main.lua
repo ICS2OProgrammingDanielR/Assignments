@@ -50,9 +50,13 @@ myHexagon.x = 200
 myHexagon.y = 50
 
 -- set the width of the border
-myHexagon.strokeWidth = 20
+myHexagon.strokeWidth = 10
 -- set the color of the inside of the triangle
 myHexagon:setFillColor(0/255, 247/255, 255/255)
 
 -- set the color of the inside of the triangle
 myHexagon:setStrokeColor(229/255, 101/255, 243/255)
+
+local myOctagon
+local myOctagonText
+local vMyOctagon = {}
