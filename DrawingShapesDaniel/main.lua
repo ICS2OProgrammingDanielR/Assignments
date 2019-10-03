@@ -59,7 +59,7 @@ myHexagon:setStrokeColor(0/255, 247/255, 255/255)
 
 local myOctagon
 local myOctagonText
-local vMyOctagon = (-10,-80, 10,-80, 15,-70, 15,-50, 10,0, -10,0, -15,-50, -15,-70)
+local vMyOctagon = {-20,-80, 20,-80, 25,-70, 25,-50, 20,0, -20,0, -25,-50, -25,-70}
 local baseOfMyOctagon = 200
 local heightOfMyOctagon = 69
 
