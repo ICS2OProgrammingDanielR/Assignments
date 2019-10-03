@@ -37,7 +37,7 @@ myTriangle:setStrokeColor(229/255, 101/255, 243/255)
 
 local myHexagon
 local myHexagonText
-local vMyHexagon = {-20,-20, 0,0, 0,20, 20,40, 40,40, 0,-20}
+local vMyHexagon = {-50,-60, 20,20, 20,40, 30,60, 60,60, 20,-40}
 local baseOfMyHexagon = 250
 local heightOfMyHexagon = 70
 
@@ -46,7 +46,7 @@ myHexagon = display.newPolygon(0, 0, vMyHexagon)
 
 myHexagon.anchorX = 0
 myHexagon.anchorY = 0
-myHexagon.x = 200
+myHexagon.x = 10
 myHexagon.y = 50
 
 -- set the width of the border
@@ -55,8 +55,23 @@ myHexagon.strokeWidth = 10
 myHexagon:setFillColor(0/255, 247/255, 255/255)
 
 -- set the color of the inside of the triangle
-myHexagon:setStrokeColor(229/255, 101/255, 243/255)
+myHexagon:setStrokeColor(0/255, 247/255, 255/255)
 
 local myOctagon
 local myOctagonText
-local vMyOctagon = {}
+local vMyOctagon = (-10,-80, 10,-80, 15,-70, 15,-50, 10,0, -10,0, -15,-50, -15,-70)
+local baseOfMyOctagon = 200
+local heightOfMyOctagon = 69
+
+-- draw my octagon
+myOctagon = display.newPolygon(0,0, vMyOctagon)
+
+myOctagon.x = 800
+myOctagon.y = 100
+-- set the width of the border
+myHexagon.strokeWidth = 20
+-- set the color of the inside of the triangle
+myOctagon:setFillColor(0/255, 247/255, 255/255)
+
+-- set the color of the inside of the triangle
+myOctagon:setStrokeColor(0/255, 247/255, 255/255)
