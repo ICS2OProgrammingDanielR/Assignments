@@ -1,5 +1,5 @@
 -- Title: AreaOfRectangleAndCircle
--- Name: Your Name
+-- Name: Daniel Raissi
 -- Course: ICS2O/3C
 -- This program will show shapes on an ipad
 
@@ -17,6 +17,8 @@ local vMyTriangle = {-69, -80, 69, -80, 0, 90}
 local textSizeMyTriangle = 60
 local baseOfMyTriangle = 250
 local heightOfMyTriangle = 70
+local textSize = 50
+local areaOfMyTriangle = 8750
 
 -- draw my triangle
 myTriangle = display.newPolygon(0, 0, vMyTriangle)
@@ -34,6 +36,17 @@ myTriangle:setFillColor(0/255, 247/255, 255/255)
 
 -- set the color of the inside of the triangle
 myTriangle:setStrokeColor(229/255, 101/255, 243/255)
+
+-- write the area of the triangle
+areaText = display.newText("The area of this triangle with a base of \n" ..
+	    baseOfMyTriangle .. " and a height of " .. heightOfMyTriangle .. " is " .. 
+		areaOfMyTriangle .. " pixels².", 0, 0, Ariel, textSize)
+       
+-- anchor the text and set its (x,y) position
+areaText.anchorX = 0
+areaText.anchorY = 0
+areaText.x = 20
+areaText.y = display.contentHeight/2
 
 local myHexagon
 local myHexagonText
