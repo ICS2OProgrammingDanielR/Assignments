@@ -1,9 +1,9 @@
 -----------------------------------------------------------------------------------------
 --
 -- main_menu.lua
--- Created by: Noah
--- Date: November 20th, 2019
--- Description: This is the main menu, displaying the credits, instructions, play buttons and mute button.
+-- Created by: Daniel
+-- Date: November 22th, 2019
+-- Description: This is the main men
 -----------------------------------------------------------------------------------------
 display.setStatusBar(display.HiddenStatusBar)
 -----------------------------------------------------------------------------------------
@@ -44,7 +44,7 @@ local border
 local channel
 local channel2
 local transitionSound = audio.loadStream("Sounds/jump.mp3")
-local music = audio.loadStream("Sounds/mainMusic.mp3")
+local music = audio.loadStream("Sounds/funnySong.mp3")
 
 -----------------------------------------------------------------------------------------
 -- LOCAL FUNCTIONS
@@ -53,24 +53,7 @@ local music = audio.loadStream("Sounds/mainMusic.mp3")
 
 -- Creating Mute function to pause audio
 
-local function Mute( )
-    
-    audio.pause(channel)
-    muteButton.isVisible = false
-    unmuteButton.isVisible = true
-    channel2 = audio.play(transitionSound)
-end    
 
--- creating unmute function to resume audio
-
-local function UnMute( )
-    
-    audio.resume(channel)
-    channel2 = audio.play(transitionSound)
-    muteButton.isVisible = true
-    unmuteButton.isVisible = false
-
-end    
 
 -- Creating Transition to Level1 Screen
 local function Level1ScreenTransition( )
@@ -96,7 +79,25 @@ end
 -----------------------------------------------------------------------------------------
 -- GLOBAL SCENE FUNCTIONS
 -----------------------------------------------------------------------------------------
+function Mute( )
+    
+    audio.pause(channel)
+    muteButton.isVisible = false
+    unmuteButton.isVisible = true
+    channel2 = audio.play(transitionSound)
+    
+end    
 
+-- creating unmute function to resume audio
+
+function UnMute( )
+    
+    audio.resume(channel)
+    channel2 = audio.play(transitionSound)
+    muteButton.isVisible = true
+    unmuteButton.isVisible = false
+
+end    
 -- The function called when the screen doesn't exist
 function scene:create( event )
 
@@ -108,7 +109,7 @@ function scene:create( event )
     -----------------------------------------------------------------------------------------
 
     -- Creating background and setting the image
-   background = display.newImageRect("Images/MainMenu@2x.png", display.contentWidth, display.contentHeight)
+   background = display.newImageRect("Images/FakeMainMenuNoah@2x.png", display.contentWidth, display.contentHeight)
    background.x = display.contentCenterX
    background.y = display.contentCenterY
   
@@ -125,13 +126,13 @@ function scene:create( event )
     muteButton = widget.newButton( 
         {   
             -- Set its position on the screen relative to the screen size
-            x = display.contentWidth - 100,
+            x = display.contentWidth - 512,
             y = display.contentHeight - 100 ,
             
 
             -- Insert the images here
-            defaultFile = "Images/audio.png",
-            overFile = "Images/audio.png",
+            defaultFile = "Images/muteButtonUnpressed.png",
+            overFile = "Images/muteButtonPressed.png",
 
             -- When the button is released, call the Mute function
             onRelease = Mute          
@@ -143,13 +144,13 @@ function scene:create( event )
     unmuteButton = widget.newButton( 
         {   
             -- Set its position on the screen relative to the screen size
-            x = display.contentWidth - 100,
+            x = display.contentWidth - 512,
             y = display.contentHeight - 100,
             
 
             -- Insert the images here
-            defaultFile = "Images/audio.png",
-            overFile = "Images/audio.png",
+            defaultFile = "Images/muteButtonUnpressed.png",
+            overFile = "Images/muteButtonPressed.png",
 
             -- When the button is released, call the unMute function
             onRelease = UnMute          
@@ -162,16 +163,16 @@ function scene:create( event )
     -- Creating Play Button
     playButton = widget.newButton( 
         {   
-            -- Set its position on the screen relative to the screen size
-            x = display.contentWidth - 800,
-            y = display.contentHeight - 100,
+            -- Set its position 
+            x = display.contentWidth - 512,
+            y = display.contentHeight - 384,
             
 
             -- Insert the images here
             defaultFile = "Images/PlayButtonUnpressedDaniel@2x.png",
             overFile = "Images/PlayButtonPressedDaniel@2x.png",
 
-            -- When the button is released, call the Level1 screen transition function
+            -- When the button is pressed and realeased lvel one screen shold appear
             onRelease = Level1ScreenTransition          
         } )
         playButton.width = 200
@@ -181,8 +182,8 @@ function scene:create( event )
     creditsButton = widget.newButton( 
         {
             -- Set its position on the screen relative to the screen size
-            x = display.contentWidth*7/8,
-            y = display.contentHeight - 300,
+            x = display.contentWidth - 256,
+            y = display.contentHeight - 100,
 
             -- Insert the images here
             defaultFile = "Images/CreditsButtonUnpressedNoah@2x.png",
@@ -201,8 +202,8 @@ function scene:create( event )
     instructionsButton = widget.newButton( 
         {
             -- Set its position on the screen relative to the screen size
-            x = display.contentWidth  - 800,
-            y = display.contentHeight - 300,
+            x = display.contentWidth  - 768,
+            y = display.contentHeight - 100,
 
             -- Insert the images here
             defaultFile = "Images/InstructionsButtonUnpressedNoah@2x.png",

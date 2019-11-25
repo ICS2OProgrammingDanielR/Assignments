@@ -36,8 +36,8 @@ local logo = display.newImageRect("Images/CompanyLogoDaniel@2x.png", 50, 50)
 
 -- size of the logo
 local function LogoSize ()
-	logo.xScale = logo.xScale + 0.7
-	logo.yScale = logo.yScale + 0.7
+    logo.xScale = logo.xScale + 0.7
+    logo.yScale = logo.yScale + 0.7
     logo.rotation = 0
     logo.x = display.contentWidth/2
     logo.y = display.contentHeight/2
@@ -50,8 +50,8 @@ end
 logo.alpha = 1
 
 local function growlogo( event )
-	-- make the logo grow gradually
-	logo:scale(1.01,1.01)
+    -- make the logo grow gradually
+    logo:scale(1.01,1.01)
 
     -- fadeing
     logo.alpha = logo.alpha - 0.0000001
@@ -59,25 +59,17 @@ end
 Runtime:addEventListener("enterFrame", growlogo)
 
 
+local function gotoMainMenu( )       
+   composer.gotoScene( "main_menu", {effect = "crossFade", time = 1000})
+end 
+
 -- location of logo
 logo.x = display.contentCenterX
 logo.y = display.contentCenterY
 
--- go to the main menu
-local function GoToMainMenu()
-    -- go to main menu screen
-    composer.gotoScene( "main_menu" )
-end
 
--- logo goes fully invisible
-local function MakeLogoFullyInvis()
-    logo.isVisible = false
 
-    if (logo.isVisible == false) then
-        text.isVisible = true
-        timer.performWithDelay(500, GoToMainMenu)
-    end
-end
+
 
 
 -- set the image to be transparent
@@ -96,7 +88,7 @@ end
 
 local function logobyebye()
     -- time till text appears
-    composer.gotoScene( "main_menu", {effect = "crossFade", time = 1000})
+    timer.performWithDelay(4000, MakeLogoFullyInvis)
 end
 
 
@@ -105,8 +97,7 @@ text.y = display.contentHeight/3
 
 fadewords()
 
--- makes the main menu screen 
-logobyebye()
+
 
 -- The function called when the screen doesn't exist
 function scene:create( event )
@@ -130,8 +121,11 @@ function scene:show( event )
     -----------------------------------------------------------------------------------------
 
     if ( phase == "will" ) then
-		elseif ( phase == "did" ) then
-
+        elseif ( phase == "did" ) then
+        -- Called when the scene is now on screen.
+        -- Insert code here to make the scene come alive.
+        -- Example: start timers, begin animation, play audio, etc.
+         timer.performWithDelay ( 5500, gotoMainMenu)
     end
 
 end
