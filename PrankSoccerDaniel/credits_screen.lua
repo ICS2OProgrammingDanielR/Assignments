@@ -40,7 +40,7 @@ local backButton
 local channel
 local channel2
 local music = audio.loadStream("Sounds/creditsMusic.mp3")
-local transitionSound = audio.loadStream("Sounds/jump.mp3")
+local transitionSound = audio.loadStream("Sounds/bop.mp3")
 
 -----------------------------------------------------------------------------------------
 -- LOCAL FUNCTIONS
@@ -65,8 +65,9 @@ function scene:create( event )
     -----------------------------------------------------------------------------------------
     -- BACKGROUND IMAGE & STATIC OBJECTS
     -----------------------------------------------------------------------------------------
-   
-   background = display.newRect(display.contentCenterX, display.contentCenterY, display.contentWidth, display.contentHeight)
+   background = display.newImageRect("Images/CreditsScreenDanielR@2x.png", display.contentWidth, display.contentHeight)
+   background.x = display.contentCenterX
+   background.y = display.contentCenterY
 
 -- insert background into scene
       sceneGroup:insert( background )

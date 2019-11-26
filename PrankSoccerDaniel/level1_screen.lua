@@ -37,7 +37,7 @@ local backButton
 local channel
 local music = audio.loadStream("Sounds/creditsMusic.mp3")
 local channel2
-local transitionSound = audio.loadStream("Sounds/jump.mp3")
+local transitionSound = audio.loadStream("Sounds/bop.mp3")
 
 -----------------------------------------------------------------------------------------
 -- LOCAL FUNCTIONS
