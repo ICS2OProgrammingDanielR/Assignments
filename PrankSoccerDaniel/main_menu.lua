@@ -3,7 +3,7 @@
 -- main_menu.lua
 -- Created by: Daniel
 -- Date: November 22th, 2019
--- Description: This is the main men
+-- Description: This is the main menu
 -----------------------------------------------------------------------------------------
 display.setStatusBar(display.HiddenStatusBar)
 -----------------------------------------------------------------------------------------
