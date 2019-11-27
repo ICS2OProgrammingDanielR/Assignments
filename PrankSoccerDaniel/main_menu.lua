@@ -43,7 +43,7 @@ local border
 -- audio variables
 local channel
 local channel2
-local transitionSound = audio.loadStream("Sounds/jump.mp3")
+local transitionSound = audio.loadStream("Sounds/bop.mp3")
 local music = audio.loadStream("Sounds/funnySong.mp3")
 
 -----------------------------------------------------------------------------------------
@@ -103,7 +103,16 @@ function scene:create( event )
 
     -- Creating a group that associates objects with the scene
     local sceneGroup = self.view
+    
 
+
+
+    ----------------------------------------------------------------------------------------
+    -- MUTE AND UNMUTE BUTTON
+    ----------------------------------------------------------------------------------------
+    unmute = display.newImageRect("Images/muteButtonUnpressed.png", 100, 100)
+    unmute.x = display.contentWidth/2
+    unmute.y = display.contentHeight
     -----------------------------------------------------------------------------------------
     -- BACKGROUND IMAGE & STATIC OBJECTS
     -----------------------------------------------------------------------------------------
@@ -122,41 +131,6 @@ function scene:create( event )
     -- BUTTON WIDGETS
     -----------------------------------------------------------------------------------------   
 
- -- Creating Mute Button
-    muteButton = widget.newButton( 
-        {   
-            -- Set its position on the screen relative to the screen size
-            x = display.contentWidth - 512,
-            y = display.contentHeight - 100 ,
-            
-
-            -- Insert the images here
-            defaultFile = "Images/muteButtonUnpressed.png",
-            overFile = "Images/muteButtonPressed.png",
-
-            -- When the button is released, call the Mute function
-            onRelease = Mute          
-        } )
-        muteButton.width = 100
-        muteButton.height = 100
-
--- Creating unMute Button (Unmute Button)
-    unmuteButton = widget.newButton( 
-        {   
-            -- Set its position on the screen relative to the screen size
-            x = display.contentWidth - 512,
-            y = display.contentHeight - 100,
-            
-
-            -- Insert the images here
-            defaultFile = "Images/muteButtonUnpressed.png",
-            overFile = "Images/muteButtonPressed.png",
-
-            -- When the button is released, call the unMute function
-            onRelease = UnMute          
-        } )
-        unmuteButton.width = 100
-        unmuteButton.height = 100
        
 
 
@@ -220,9 +194,6 @@ function scene:create( event )
     sceneGroup:insert( playButton )
     sceneGroup:insert( creditsButton )
     sceneGroup:insert( instructionsButton )
-    sceneGroup:insert( muteButton )
-    sceneGroup:insert( unmuteButton )
-
     -- Send the background image to the back layer so all other objects can be on top
   
     background:toBack()
@@ -240,7 +211,8 @@ function scene:show( event )
 
     -- Creating a group that associates objects with the scene
     local sceneGroup = self.view
-    --plays background music loop
+    unmuteButton:addEventListener("touch", UnMute ) 
+    muteButton:addEventListener("touch", Mute)
     channel = audio.play(music, {loop = -1})
 
     -----------------------------------------------------------------------------------------
