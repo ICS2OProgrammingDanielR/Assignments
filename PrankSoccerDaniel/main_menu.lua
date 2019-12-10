@@ -1,9 +1,9 @@
 -----------------------------------------------------------------------------------------
 --
 -- main_menu.lua
--- Created by: Daniel
--- Date: November 22th, 2019
--- Description: This is the main men
+-- Created by: Noah
+-- Date: November 20th, 2019
+-- Description: This is the main menu, displaying the credits, instructions, play buttons and mute button.
 -----------------------------------------------------------------------------------------
 display.setStatusBar(display.HiddenStatusBar)
 -----------------------------------------------------------------------------------------
@@ -44,7 +44,7 @@ local border
 local channel
 local channel2
 local transitionSound = audio.loadStream("Sounds/bop.mp3")
-local music = audio.loadStream("Sounds/funnySong.mp3")
+local music = audio.loadStream("Sounds/mainMenu.mp3")
 
 -----------------------------------------------------------------------------------------
 -- LOCAL FUNCTIONS
@@ -57,7 +57,7 @@ local music = audio.loadStream("Sounds/funnySong.mp3")
 
 -- Creating Transition to Level1 Screen
 local function Level1ScreenTransition( )
-    composer.gotoScene( "level1_screen", {effect = "zoomOutIn", time = 1000})
+    composer.gotoScene( "level2_screen", {effect = "zoomOutIn", time = 1000})
     audio.stop()
     channel2 = audio.play(transitionSound)
 end    
@@ -103,16 +103,7 @@ function scene:create( event )
 
     -- Creating a group that associates objects with the scene
     local sceneGroup = self.view
-    
 
-
-
-    ----------------------------------------------------------------------------------------
-    -- MUTE AND UNMUTE BUTTON
-    ----------------------------------------------------------------------------------------
-    unmute = display.newImageRect("Images/muteButtonUnpressed.png", 100, 100)
-    unmute.x = display.contentWidth/2
-    unmute.y = display.contentHeight
     -----------------------------------------------------------------------------------------
     -- BACKGROUND IMAGE & STATIC OBJECTS
     -----------------------------------------------------------------------------------------
@@ -131,6 +122,42 @@ function scene:create( event )
     -- BUTTON WIDGETS
     -----------------------------------------------------------------------------------------   
 
+ 
+ -- Creating Mute Button
+    muteButton = widget.newButton( 
+        {   
+            -- Set its position on the screen relative to the screen size
+            x = display.contentWidth - 512,
+            y = display.contentHeight - 100 ,
+            
+
+            -- Insert the images here
+            defaultFile = "Images/muteButtonUnpressed.png",
+            overFile = "Images/muteButtonPressed.png",
+
+            -- When the button is released, call the Mute function
+            onRelease = Mute          
+        } )
+        muteButton.width = 100
+        muteButton.height = 100
+
+-- Creating unMute Button (Unmute Button)
+    unmuteButton = widget.newButton( 
+        {   
+            -- Set its position on the screen relative to the screen size
+            x = display.contentWidth - 512,
+            y = display.contentHeight - 100,
+            
+
+            -- Insert the images here
+            defaultFile = "Images/muteButtonUnpressed.png",
+            overFile = "Images/muteButtonPressed.png",
+
+            -- When the button is released, call the unMute function
+            onRelease = UnMute          
+        } )
+        unmuteButton.width = 100
+        unmuteButton.height = 100
        
 
 
@@ -194,6 +221,9 @@ function scene:create( event )
     sceneGroup:insert( playButton )
     sceneGroup:insert( creditsButton )
     sceneGroup:insert( instructionsButton )
+    sceneGroup:insert( muteButton )
+    sceneGroup:insert( unmuteButton )
+
     -- Send the background image to the back layer so all other objects can be on top
   
     background:toBack()
@@ -211,8 +241,7 @@ function scene:show( event )
 
     -- Creating a group that associates objects with the scene
     local sceneGroup = self.view
-    unmuteButton:addEventListener("touch", UnMute ) 
-    muteButton:addEventListener("touch", Mute)
+    --plays background music loop
     channel = audio.play(music, {loop = -1})
 
     -----------------------------------------------------------------------------------------

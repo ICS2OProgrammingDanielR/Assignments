@@ -2,8 +2,7 @@
 --
 -- main_menu.lua
 -- Created by: Daniel
--- Date: Nov 22th, 2019
--- Description: This is the level 1 screen, displaying level 1
+-- Description: This is the level 1 screen
 -----------------------------------------------------------------------------------------
 display.setStatusBar(display.HiddenStatusBar)
 -----------------------------------------------------------------------------------------
@@ -37,7 +36,7 @@ local backButton
 local channel
 local music = audio.loadStream("Sounds/creditsMusic.mp3")
 local channel2
-local transitionSound = audio.loadStream("Sounds/bop.mp3")
+local transitionSound = audio.loadStream("Sounds/jump.mp3")
 
 -----------------------------------------------------------------------------------------
 -- LOCAL FUNCTIONS
@@ -66,7 +65,7 @@ function scene:create( event )
 
     -----------------------------------------------------------------------------------------
     -- BACKGROUND IMAGE & STATIC OBJECTS
-    -----------------------------------------------------------------------------------------   
+    ----------------------------------------------------------------------------------------- 
 
     background = display.newImageRect("Images/level1ScreenTestNoah@2x.png", display.contentWidth, display.contentHeight)
    background.x = display.contentCenterX
