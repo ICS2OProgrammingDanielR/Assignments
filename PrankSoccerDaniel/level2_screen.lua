@@ -673,7 +673,7 @@ netBorder4:rotate (-62)
             
 
             -- Insert the images here
-            defaultFile = "Images/clockwiseButtonUnpressedNoah@2x.png",
+            defaultFile = "Images/clockwiseButtonUnpressedNoah@2x - Copy.png",
             overFile = "Images/clockwiseButtonPressedNoah@2x - Copy.png",
 
             -- When the button is released, call the Level1 screen transition function
