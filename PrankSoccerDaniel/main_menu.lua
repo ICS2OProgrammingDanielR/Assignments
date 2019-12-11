@@ -28,6 +28,13 @@ sceneName = "main_menu"
 -- Creating Scene Object
 local scene = composer.newScene( sceneName )
 
+
+-----------------------------------------------------------------------------------------
+-- GLOBAL VARIABLES
+-----------------------------------------------------------------------------------------
+soundOn = true
+
+
 -----------------------------------------------------------------------------------------
 -- LOCAL VARIABLES
 -----------------------------------------------------------------------------------------
@@ -37,14 +44,19 @@ local playButton
 local creditsButton
 local instructionsButton
 local muteButton
-local unmuteButton
+local unMuteButton
 local border
 
+-----------------------------------------------------------------------------------------
+-- SOUNDS
+-----------------------------------------------------------------------------------------
+
+
 -- audio variables
-local channel
-local channel2
 local transitionSound = audio.loadStream("Sounds/bop.mp3")
-local music = audio.loadStream("Sounds/mainMenu.mp3")
+local transitionSoundChannel
+local music = audio.loadStream("Sounds/mainMusic.mp3")
+local musicChannel = audio.play(music, {channel=1, loop = -1})
 
 -----------------------------------------------------------------------------------------
 -- LOCAL FUNCTIONS
@@ -52,52 +64,52 @@ local music = audio.loadStream("Sounds/mainMenu.mp3")
 
 
 -- Creating Mute function to pause audio
+local function Mute( touch )
+    if (touch.phase == "ended") then
+        audio.pause(musicChannel)
+        soundOn = false
+        muteButton.isVisible = false
+        unMuteButton.isVisible = true
+    end
+end
+
+
+-- Creating Mute function to pause audio
+local function UnMute( touch )
+    if (touch.phase == "ended") then
+        audio.resume(musicChannel)
+        soundOn = true
+        muteButton.isVisible = true
+        unMuteButton.isVisible = false
+    end
+end
+
 
 
 
 -- Creating Transition to Level1 Screen
 local function Level1ScreenTransition( )
-    composer.gotoScene( "level2_screen", {effect = "zoomOutIn", time = 1000})
-    audio.stop()
-    channel2 = audio.play(transitionSound)
+    composer.gotoScene( "level2_screen", {effect = "fade", time = 1000})
+    
+    transitionSoundChannel = audio.play(transitionSound)
 end    
 
 -- Creating Transition to Instructions screen
 local function InstructionsTransition( )
     composer.gotoScene( "instructions", {effect = "slideUp", time = 1000})
-    audio.stop()
-    channel2 = audio.play(transitionSound)
+    transitionSoundChannel = audio.play(transitionSound)
 end    
 
 
 --Creating Transition Function to Credits Page
 local function CreditsTransition( )       
     composer.gotoScene( "credits_screen", {effect = "slideLeft", time = 500})
-    audio.stop()
-    channel2 = audio.play(transitionSound)
+    transitionSoundChannel = audio.play(transitionSound) 
 end 
 -----------------------------------------------------------------------------------------
--- GLOBAL SCENE FUNCTIONS
+-- GLOBAL FUNCTIONS
 -----------------------------------------------------------------------------------------
-function Mute( )
-    
-    audio.pause(channel)
-    muteButton.isVisible = false
-    unmuteButton.isVisible = true
-    channel2 = audio.play(transitionSound)
-    
-end    
-
--- creating unmute function to resume audio
-
-function UnMute( )
-    
-    audio.resume(channel)
-    channel2 = audio.play(transitionSound)
-    muteButton.isVisible = true
-    unmuteButton.isVisible = false
-
-end    
+   
 -- The function called when the screen doesn't exist
 function scene:create( event )
 
@@ -105,7 +117,7 @@ function scene:create( event )
     local sceneGroup = self.view
 
     -----------------------------------------------------------------------------------------
-    -- BACKGROUND IMAGE & STATIC OBJECTS
+    -- OBJECT CREATION
     -----------------------------------------------------------------------------------------
 
     -- Creating background and setting the image
@@ -117,74 +129,49 @@ function scene:create( event )
     -- Associating display objects with this scene 
     sceneGroup:insert( background )
 
+    muteButton = display.newImageRect("Images/muteButtonUnpressed.png", 100, 100)
+    muteButton.x = 512
+    muteButton.y = 600
+    muteButton.isVisible = true
+
+    unMuteButton = display.newImageRect("Images/muteButtonPressed.png", 100, 100)
+    unMuteButton.x = 512
+    unMuteButton.y = 600
+    unMuteButton.isVisible = false
+
+    sceneGroup:insert( muteButton )
+    sceneGroup:insert( unMuteButton )
+    
    
     -----------------------------------------------------------------------------------------
     -- BUTTON WIDGETS
     -----------------------------------------------------------------------------------------   
 
- 
- -- Creating Mute Button
-    muteButton = widget.newButton( 
-        {   
-            -- Set its position on the screen relative to the screen size
-            x = display.contentWidth - 512,
-            y = display.contentHeight - 100 ,
-            
-
-            -- Insert the images here
-            defaultFile = "Images/muteButtonUnpressed.png",
-            overFile = "Images/muteButtonPressed.png",
-
-            -- When the button is released, call the Mute function
-            onRelease = Mute          
-        } )
-        muteButton.width = 100
-        muteButton.height = 100
-
--- Creating unMute Button (Unmute Button)
-    unmuteButton = widget.newButton( 
-        {   
-            -- Set its position on the screen relative to the screen size
-            x = display.contentWidth - 512,
-            y = display.contentHeight - 100,
-            
-
-            -- Insert the images here
-            defaultFile = "Images/muteButtonUnpressed.png",
-            overFile = "Images/muteButtonPressed.png",
-
-            -- When the button is released, call the unMute function
-            onRelease = UnMute          
-        } )
-        unmuteButton.width = 100
-        unmuteButton.height = 100
-       
-
 
     -- Creating Play Button
     playButton = widget.newButton( 
         {   
-            -- Set its position 
+            -- Set its position on the screen relative to the screen size
             x = display.contentWidth - 512,
-            y = display.contentHeight - 384,
-            
+            y = display.contentHeight - 385,
+            width = 200,
+            height = 100,            
 
             -- Insert the images here
             defaultFile = "Images/PlayButtonUnpressedDaniel@2x.png",
             overFile = "Images/PlayButtonPressedDaniel@2x.png",
 
-            -- When the button is pressed and realeased lvel one screen shold appear
+            -- When the button is released, call the Level1 screen transition function
             onRelease = Level1ScreenTransition          
         } )
-        playButton.width = 200
-        playButton.height = 100
+    
     -----------------------------------------------------------------------------------------
     -- Creating Credits Button
     creditsButton = widget.newButton( 
         {
             -- Set its position on the screen relative to the screen size
-            x = display.contentWidth - 256,
-            y = display.contentHeight - 100,
+            x = display.contentWidth - 174,
+            y = display.contentHeight - 150,
 
             -- Insert the images here
             defaultFile = "Images/CreditsButtonUnpressedNoah@2x.png",
@@ -203,8 +190,8 @@ function scene:create( event )
     instructionsButton = widget.newButton( 
         {
             -- Set its position on the screen relative to the screen size
-            x = display.contentWidth  - 768,
-            y = display.contentHeight - 100,
+            x = display.contentWidth - 850,
+            y = display.contentHeight - 150,
 
             -- Insert the images here
             defaultFile = "Images/InstructionsButtonUnpressedNoah@2x.png",
@@ -221,13 +208,6 @@ function scene:create( event )
     sceneGroup:insert( playButton )
     sceneGroup:insert( creditsButton )
     sceneGroup:insert( instructionsButton )
-    sceneGroup:insert( muteButton )
-    sceneGroup:insert( unmuteButton )
-
-    -- Send the background image to the back layer so all other objects can be on top
-  
-    background:toBack()
-
 
 
 end -- function scene:create( event )   
@@ -242,7 +222,7 @@ function scene:show( event )
     -- Creating a group that associates objects with the scene
     local sceneGroup = self.view
     --plays background music loop
-    channel = audio.play(music, {loop = -1})
+    
 
     -----------------------------------------------------------------------------------------
 
@@ -260,6 +240,18 @@ function scene:show( event )
     -- Example: start timers, begin animation, play audio, etc.
     elseif ( phase == "did" ) then       
         
+        if (soundOn == true) then
+            audio.resume(musicChannel)
+            unMuteButton.isVisible = false
+            muteButton.isVisible = true
+        else
+            unMuteButton.isVisible = true
+            muteButton.isVisible = false
+            audio.pause(musicChannel)
+
+        end
+        muteButton:addEventListener("touch", Mute)
+        unMuteButton:addEventListener("touch", UnMute)
 
     end
 
@@ -288,6 +280,9 @@ function scene:hide( event )
 
     elseif ( phase == "did" ) then
         -- Called immediately after scene goes off screen.
+        muteButton:removeEventListener("touch", Mute)
+        unMuteButton:removeEventListener("touch", UnMute)
+        audio.pause(musicChannel)
     end
 
 end -- function scene:hide( event )

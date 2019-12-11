@@ -3,7 +3,7 @@
 --  instructions.lua
 -- Created by: Daniel
 -- Date: November 22th, 2019
--- Description: This is the instructions screen, displaying the instructions & back buttons.
+-- Description: This is the instructions screen.
 -----------------------------------------------------------------------------------------
 display.setStatusBar(display.HiddenStatusBar)
 -----------------------------------------------------------------------------------------
