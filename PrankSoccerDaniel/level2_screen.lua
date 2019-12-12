@@ -24,7 +24,7 @@ local widget = require( "widget" )
 -----------------------------------------------------------------------------------------
 
 -- Naming Scene
-sceneName = "level1_screen"
+sceneName = "level2_screen"
 
 -----------------------------------------------------------------------------------------
 
@@ -38,7 +38,7 @@ local scene = composer.newScene( sceneName )
 local background
 local backButton
 local channel
-local music = audio.loadStream("Sounds/level1Music.mp3")
+local music = audio.loadStream("Sounds/level2Music.mp3")
 local channel2
 local transitionSound = audio.loadStream("Sounds/jump.mp3")
 local goalSound = audio.loadStream("Sounds/win.mp3")
@@ -91,11 +91,6 @@ local away
 -----------------------------------------------------------------------------------------
 -- LOCAL FUNCTIONS
 -----------------------------------------------------------------------------------------
-local function Level3Transition()
-
-    composer.gotoScene( "level3_screen", {effect = "crossFade", time = 1000})
-  
-end
 
 local function AddPhysicsBodies()
     --add to the physics engine
@@ -198,7 +193,6 @@ local function ChangeScore( )
     goalText.text = "2"
   elseif (goal1 == 3)then
     goalText.text = "3"
-    timer.performWithDelay(2000, Level3Transition)
     
 
   end
