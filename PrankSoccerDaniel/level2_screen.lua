@@ -80,7 +80,7 @@ local characterJumping
 local goal1 = 0
 local goal_ = 0
 local goalText 
-local goal_text
+local goalOpponentText
 local netBlock
 local titleShoot
 local youMiss
@@ -171,16 +171,16 @@ end
 local function ChangeScore2( )
  
   if (goal_ == 2)then
-    goal_text.text = "-1"
+    goalOpponentText.text = "-1"
     upButton.isVisible = false
     rightButton.isVisible = false
     leftButton.isVisible = false
     
 
   elseif (goal_ == 4)then
-    goal_text.text = "-2"
+    goalOpponentText.text = "-2"
   elseif (goal_ == 6)then
-    goal_text.text = "-3"
+    goalOpponentText.text = "-3"
      composer.gotoScene( "you_lose", {effect = "crossFade", time = 1000})
   end
 end
@@ -229,7 +229,7 @@ local function onCollision( self, event )
 
 
             -- show overlay with math question
-            composer.showOverlay( "level1_Question", { isModal = true, effect = "fade", time = 500})
+            composer.showOverlay( "level2_Question", { isModal = true, effect = "fade", time = 500})
 
             -- Increment questions answered
             --questionsAnswered = questionsAnswered + 1
@@ -477,17 +477,17 @@ function scene:create( event )
 
       sceneGroup:insert( background )
 
-   -- your goal text
-   goalText = display.newText("0", display.contentWidth/5.5 + 10 , display.contentHeight/1.8 + 5, nil, 150 )
+    -- your goal text
+   goalText = display.newText("0", display.contentWidth/5.5 + 10 , display.contentHeight/1.8 + 5, nil, 100 )
    goalText:setFillColor(255/255, 0/255, 0/255)
   
-
+   sceneGroup:insert( goalText )
 
    -- opponent's goal text
-   goalOpponentText = display.newText("0", display.contentWidth/1.5 + 150 , display.contentHeight/1.8 + 5, nil, 150 )
+   goalOpponentText = display.newText("0", display.contentWidth/1.5 + 150 , display.contentHeight/1.8 + 5, nil, 100 )
    goalOpponentText:setFillColor(255/255, 0/255, 0/255)
 
-
+   sceneGroup:insert( goalOpponentText )
 
    bottomBorder = display.newRect(display.contentWidth/2, 708, display.contentWidth, 100)
    bottomBorder.alpha = 0
@@ -654,8 +654,8 @@ netBorder4:rotate (-62)
             
 
             -- Insert the images here
-            defaultFile = "Images/upButtonUnpressedNoah@2x - Copy.png",
-            overFile = "Images/upButtonPressedNoah@2x - Copy.png",
+            defaultFile = "Images/upButtonUnpressedNoah@2x.png",
+            overFile = "Images/upButtonPressedNoah@2x.png",
 
             -- When the button is released, call the Level1 screen transition function
             onRelease = MoveCharacterUp          
@@ -673,8 +673,8 @@ netBorder4:rotate (-62)
             
 
             -- Insert the images here
-            defaultFile = "Images/clockwiseButtonUnpressedNoah@2x - Copy.png",
-            overFile = "Images/clockwiseButtonPressedNoah@2x - Copy.png",
+            defaultFile = "Images/clockwiseButtonUnpressedNoah@2x.png",
+            overFile = "Images/clockwiseButtonPressedNoah@2x.png",
 
             -- When the button is released, call the Level1 screen transition function
             onRelease = MoveCharacterRight          
@@ -692,8 +692,8 @@ netBorder4:rotate (-62)
             
 
             -- Insert the images here
-            defaultFile = "Images/counterclockwiseButtonUnpressedNoah@2x - Copy.png",
-            overFile = "Images/counterclockwiseButtonPressedNoah@2x - Copy - Copy.png",
+            defaultFile = "Images/counterclockwiseButtonUnpressedNoah@2x.png",
+            overFile = "Images/counterclockwiseButtonPressedNoah@2x.png",
 
             -- When the button is released, call the Level1 screen transition function
             onRelease = MoveCharacterLeft         
