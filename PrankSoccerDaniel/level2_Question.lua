@@ -1,4 +1,9 @@
------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------
+--
+-- level1_question.lua
+-- Created by: Noah
+-- Date: December 11th, 2019
+-- Description: This is the level 1 question and the level 3 question because I currently don't have enough questions-----------------------------------------------------------------------------------------
 
 -----------------------------------------------------------------------------------------
 
@@ -14,25 +19,25 @@ local physics = require( "physics")
 
 -----------------------------------------------------------------------------------------
 
--- scene name
+-- Naming Scene
 sceneName = "level2_Question"
 
 -----------------------------------------------------------------------------------------
 
+-- Creating Scene Object
 local scene = composer.newScene( sceneName )
 
 -----------------------------------------------------------------------------------------
 -- LOCAL VARIABLES
 -----------------------------------------------------------------------------------------
-numCorrect = 0
 
-
--- varribles
+-- The local variables for this scene
 local questionText
 local answerText1 
-local wrongAnswerText1
-local wrongAnswerText2
-local wrongAnswerText3
+local wrongText1
+local wrongText2
+local wrongText3
+
 local answerPosition = 1
 local bkg
 local cover
@@ -52,14 +57,9 @@ local questionBox
 local firstNumber
 local question2Image
 
-local selectSound = audio.loadStream("Sounds/cheer.mp3")
+local selectSound = audio.loadStream("Sounds/questionTheme.mp3")
 local selecSoundChannel
  
-
-
-
-
-
 -----------------------------------------------------------------------------------------
 --LOCAL FUNCTIONS
 -----------------------------------------------------------------------------------------
@@ -71,7 +71,7 @@ local function BackToLevel1()
 composer.hideOverlay( "level2_Question", { isModal = true, effect = "fade", time = 500})
 
           
-    ResumeGame()
+    ResumeGameLevel1()
 end 
 
 local function BackToLevel12() 
@@ -80,13 +80,12 @@ local function BackToLevel12()
 composer.hideOverlay( "level2_Question", { isModal = true, effect = "fade", time = 500})
 
           
-    ResumeGame2()
+    ResumeGame2Level1()
 end 
 -----------------------------------------------------------------------------------------
 --checking to see if the user pressed the right answer and bring them back to level 1
 local function TouchListenerAnswer(touch)
-    userAnswer = answerText1.text
-    numCorrect = numCorrect + 1
+    --userAnswer = answerText1.text
     selecSoundChannel = audio.play(selectSound)
     if (touch.phase == "ended") then
 
@@ -118,7 +117,7 @@ local function TouchListenerWrongAnswer2(touch)
     end 
 end
 
--- checking to see if the user pressed the right answer and bring them back to level 1
+--checking to see if the user pressed the right answer and bring them back to level 1
 local function TouchListenerWrongAnswer3(touch)
     userAnswer = wrongText3.text
     selecSoundChannel = audio.play(selectSound)
@@ -153,47 +152,54 @@ end
 local function DisplayQuestion()
     --creating random numbers
     firstNumber = math.random (1,3)
-   
+end   
+
+local function DisplayQuestion()
+    --creating random numbers
+    firstNumber = math.random (1,3)
+    selecSoundChannel = audio.play(selectSound)
 
 if (firstNumber == 1) then
 
     --creating the question depending on the selcetion number
-    questionText.text = " What do the leaves of a plant do? " 
+    questionText.text = " What is the strongest shape? " 
 
-    --creating answer text from list it corispondes with the animals list
-    answerText1.text = " Collect energy "
+    -- the answer
+    answerText1.text = " Triangle "
     
     --creating wrong answers
-    wrongText1.text = " Support the plant "
-    wrongText2.text = " Carry the nutrients "
-    wrongText3.text = " Carry the water "
+    wrongText1.text = " Trapizoid "
+    wrongText2.text = " Square "
+    wrongText3.text = " Circle "
 elseif (firstNumber == 2)then
      
-    Question2()
      --creating the question depending on the selcetion number
-    questionText.text = " What is this? " 
+    questionText.text = " What do bees do that flys can't. " 
 
-    --creating answer text from list it corispondes with the animals list
-    answerText1.text = " Stem "
+    -- the answer
+    answerText1.text = " Pollinate "
     
     --creating wrong answers
-    wrongText1.text = " Root "
-    wrongText2.text = " Leaf "
-    wrongText3.text = " Seed "
+    wrongText1.text = " Fly "
+    wrongText2.text = " Enjoy Jazz "
+    wrongText3.text = " Eat Pizza "
 elseif (firstNumber == 3)then
      --creating the question depending on the selcetion number
     questionText.text = " What is Photosynthesis? " 
 
-    --creating answer text from list it corispondes with the animals list
+    -- the answer
     answerText1.text = " Plants making Food "
     
     --creating wrong answers
     wrongText1.text = " Animals eating plants "
     wrongText2.text = " A species of plant "
     wrongText3.text = " A flower "
+
 end
 
 end
+
+
 
 local function PositionAnswers()
 
@@ -250,7 +256,7 @@ local function PositionAnswers()
 end
 
 -----------------------------------------------------------------------------------------
--- GLOBAL FUNCTIONS
+-- GLOBAL SCENE FUNCTIONS
 -----------------------------------------------------------------------------------------
 
 -- The function called when the screen doesn't exist
@@ -270,25 +276,18 @@ function scene:create( event )
     cover = display.newRoundedRect(display.contentCenterX, display.contentCenterY, display.contentWidth + 0.95, display.contentHeight*0.95, 50 )
     cover:setFillColor(255/255, 255/255, 255/255)
     cover.strokeWidth = 9
-    cover:setStrokeColor( 255/255, 0/255, 0/255)
+    cover:setStrokeColor( 0/255, 0/255, 0/255)
     
     sceneGroup:insert(bkg)
     sceneGroup:insert(cover)
 
-    question2Image = display.newImageRect("Images/WhatIsRoot.png", 200, 500)
-    question2Image.x = display.contentWidth/2 - 380
-    question2Image.y = display.contentHeight/2 + 50
-    question2Image.strokeWidth = 9
-    question2Image:setStrokeColor(255/255, 255/255, 51/255)
-    question2Image.isVisible = false
 
-
-    answerBox = display.newRect(display.contentCenterX - 90, 650, 300, 60)
+    answerBox = display.newRect(display.contentCenterX - 70, 650, 300, 60)
     answerBox.strokeWidth = 9
     answerBox:setStrokeColor(255/255, 255/255, 51/255)
      answerBox:setFillColor(0, 1, 0)
 
-    answerBox2 = display.newRect(display.contentCenterX - 90, 430, 300, 60)
+    answerBox2 = display.newRect(display.contentCenterX - 70, 430, 300, 60)
     answerBox2.strokeWidth = 9
     answerBox2:setStrokeColor(255/255, 255/255, 51/255)
      answerBox2:setFillColor(0, 1, 0)
@@ -306,20 +305,23 @@ function scene:create( event )
     sceneGroup:insert(answerBox2)
     sceneGroup:insert(answerBox3)
     sceneGroup:insert(answerBox4)
-    sceneGroup:insert(question2Image)
 
     
     questionText = display.newText("", display.contentCenterX, display.contentCenterY*3/8, Arial, 55)
     questionText:setFillColor(0/255, 0/255, 0/255)
+
     answerText1 = display.newText("", X1, Y2, Arial, 25)
     answerText1.anchorX = 0
     answerText1:setFillColor(0/255, 0/255, 0/255)
+
     wrongText1 = display.newText("", X2, Y2, Arial, 25)
     wrongText1.anchorX = 0
     wrongText1:setFillColor(0/255, 0/255, 0/255)
+
     wrongText2 = display.newText("", X1, Y1, Arial, 25)
     wrongText2:setFillColor(0/255, 0/255, 0/255)
     wrongText2.anchorX = 0
+
     wrongText3 = display.newText("", X2, Y1, Arial, 25)
     wrongText3.anchorX = 0
     wrongText3:setFillColor(0/255, 0/255, 0/255)
@@ -364,6 +366,7 @@ function scene:show( event )
         -- Example: start timers, begin animation, play audio, etc.
         DisplayQuestion()
         PositionAnswers()
+
         
 
 
@@ -393,6 +396,7 @@ function scene:hide( event )
     elseif ( phase == "did" ) then
         -- Called immediately after scene goes off screen.
         RemoveTextListeners()
+        --composer.removeScene( "level1_Question" )
     end
 
 end --function scene:hide( event )

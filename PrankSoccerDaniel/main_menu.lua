@@ -55,7 +55,7 @@ local border
 -- audio variables
 local transitionSound = audio.loadStream("Sounds/bop.mp3")
 local transitionSoundChannel
-local music = audio.loadStream("Sounds/mainMusic.mp3")
+local music = audio.loadStream("Sounds/mainMenu.mp3")
 local musicChannel = audio.play(music, {channel=1, loop = -1})
 
 -----------------------------------------------------------------------------------------

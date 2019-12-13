@@ -85,8 +85,6 @@ local netBlock
 local titleShoot
 local youMiss
 local youHit
-local home
-local away
 
 -----------------------------------------------------------------------------------------
 -- LOCAL FUNCTIONS
@@ -431,6 +429,12 @@ function ResumeGameLevel1()
 end
 
 
+
+
+
+
+
+
 function ResumeGame2Level1()
             
 
@@ -471,7 +475,7 @@ function scene:create( event )
 
       sceneGroup:insert( background )
 
-    -- your goal text
+   -- your goal text
    goalText = display.newText("0", display.contentWidth/5.5 + 10 , display.contentHeight/1.8 + 5, nil, 100 )
    goalText:setFillColor(255/255, 0/255, 0/255)
   
@@ -482,6 +486,22 @@ function scene:create( event )
    goalOpponentText:setFillColor(255/255, 0/255, 0/255)
 
    sceneGroup:insert( goalOpponentText )
+
+   titleShoot = display.newText("Shoot!", display.contentWidth/2 , display.contentHeight/2 , nil, 300 )
+   titleShoot:setFillColor(255/255, 255/255, 51/255)
+   titleShoot.isVisible = false
+   sceneGroup:insert( titleShoot)
+
+   youMiss = display.newText("Saved!", display.contentWidth/2 , display.contentHeight/1.5 , nil, 250 )
+   youMiss:setFillColor(0/255, 0/255, 200/255)
+   youMiss.isVisible = false
+   sceneGroup:insert( youMiss)
+
+   youHit = display.newText("Goal!", display.contentWidth/2 , display.contentHeight/1.5 , nil, 250 )
+   youHit:setFillColor(0/255, 0/255, 200/255)
+   youHit.isVisible = false
+   sceneGroup:insert( youHit)
+
 
    bottomBorder = display.newRect(display.contentWidth/2, 708, display.contentWidth, 100)
    bottomBorder.alpha = 0
@@ -614,7 +634,6 @@ netBorder4:rotate (-62)
 
     sceneGroup:insert( leftNet )
     sceneGroup:insert( rightNet )
-
     -----------------------------------------------------------------------------------------
     -- BUTTON WIDGETS
     -----------------------------------------------------------------------------------------   
