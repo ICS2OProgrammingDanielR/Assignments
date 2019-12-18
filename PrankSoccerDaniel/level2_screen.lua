@@ -464,8 +464,8 @@ function scene:create( event )
     local sceneGroup = self.view
 
     -----------------------------------------------------------------------------------------
-    -- BACKGROUND IMAGE & STATIC OBJECTS
-    -----------------------------------------------------------------------------------------   background = display.newRect(display.contentCenterX, display.contentCenterY, display.contentWidth, display.contentHeight)
+    -- OBJECTS
+    ----------------------------------------------------------------------------------------- 
 
     background = display.newImageRect("Images/Level2ScreenDaniel@2x.png", display.contentWidth, display.contentHeight)
     background.x = display.contentCenterX
