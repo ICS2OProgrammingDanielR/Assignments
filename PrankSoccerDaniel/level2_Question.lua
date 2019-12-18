@@ -65,22 +65,22 @@ local selecSoundChannel
 -----------------------------------------------------------------------------------------
 
 --making transition to next scene
-local function BackToLevel1() 
+local function BackToLevel2() 
     
 
 composer.hideOverlay( "level2_Question", { isModal = true, effect = "fade", time = 500})
 
           
-    ResumeGameLevel1()
+    ResumeGameLevel2()
 end 
 
-local function BackToLevel12() 
+local function BackToLevel2_() 
     
 
 composer.hideOverlay( "level2_Question", { isModal = true, effect = "fade", time = 500})
 
           
-    ResumeGame2Level1()
+    ResumeGame2Level2()
 end 
 -----------------------------------------------------------------------------------------
 --checking to see if the user pressed the right answer and bring them back to level 1
@@ -89,7 +89,7 @@ local function TouchListenerAnswer(touch)
     selecSoundChannel = audio.play(selectSound)
     if (touch.phase == "ended") then
 
-        BackToLevel1( )
+        BackToLevel2( )
     
     end 
 end
@@ -100,7 +100,7 @@ local function TouchListenerWrongAnswer(touch)
     selecSoundChannel = audio.play(selectSound)
     if (touch.phase == "ended") then
         
-        BackToLevel12( )
+        BackToLevel2_()
         
         
     end 
@@ -112,7 +112,7 @@ local function TouchListenerWrongAnswer2(touch)
     selecSoundChannel = audio.play(selectSound)
     if (touch.phase == "ended") then
 
-        BackToLevel12( )
+        BackToLevel2_( )
         
     end 
 end
@@ -124,7 +124,7 @@ local function TouchListenerWrongAnswer3(touch)
     
     if (touch.phase == "ended") then
 
-        BackToLevel12( )
+        BackToLevel2_( )
         
     end 
 end
@@ -174,7 +174,7 @@ if (firstNumber == 1) then
 elseif (firstNumber == 2)then
      
      --creating the question depending on the selcetion number
-    questionText.text = " What do bees do that flys can't. " 
+    questionText.text = " What do bees do that flies can't? " 
 
     -- the answer
     answerText1.text = " Pollinate "

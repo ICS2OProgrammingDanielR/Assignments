@@ -40,8 +40,7 @@ local backButton
 local channel
 local music = audio.loadStream("Sounds/level2Music.mp3")
 local channel2
-local transitionSound = audio.loadStream("Sounds/jump.mp3")
-local goalSound = audio.loadStream("Sounds/win.mp3")
+local transitionSound = audio.loadStream("Sounds/bop.mp3")
 local goalSoundChannel
 local kickSound = audio.loadStream("Sounds/kick.mp3")
 local kickSoundChannel
@@ -81,7 +80,7 @@ local goal1 = 0
 local goal_ = 0
 local goalText 
 local goalOpponentText
-local netBlock
+local netBlock   
 local titleShoot
 local youMiss
 local youHit
@@ -152,7 +151,6 @@ local function Reset( )
   ball1.x = display.contentCenterX
   ball1.y = 100
   ball1.isVisible = false
-  goalSoundChannel = audio.play(goalSound)
   physics.removeBody(ball1)
   
 
@@ -405,7 +403,7 @@ end
 ----------------------------------------------------------------------------------------
 -- GLOBAL SCENE FUNCTIONS
 -----------------------------------------------------------------------------------------
-function ResumeGameLevel1()
+function ResumeGameLevel2()
             
 
             physics.removeBody( ball1)
@@ -435,7 +433,7 @@ end
 
 
 
-function ResumeGame2Level1()
+function ResumeGame2Level2()
             
 
             physics.removeBody( ball1)
@@ -469,11 +467,11 @@ function scene:create( event )
     -- BACKGROUND IMAGE & STATIC OBJECTS
     -----------------------------------------------------------------------------------------   background = display.newRect(display.contentCenterX, display.contentCenterY, display.contentWidth, display.contentHeight)
 
-    background = display.newImageRect("Images/level2ScreenDaniel@2x.png", display.contentWidth, display.contentHeight)
-   background.x = display.contentCenterX
-   background.y = display.contentCenterY
+    background = display.newImageRect("Images/Level2ScreenDaniel@2x.png", display.contentWidth, display.contentHeight)
+    background.x = display.contentCenterX
+    background.y = display.contentCenterY
 
-      sceneGroup:insert( background )
+    sceneGroup:insert( background )
 
    -- your goal text
    goalText = display.newText("0", display.contentWidth/5.5 + 10 , display.contentHeight/1.8 + 5, nil, 100 )
