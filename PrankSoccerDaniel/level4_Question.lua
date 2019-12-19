@@ -1,15 +1,10 @@
 ----------------------------------------------------------------------------------------
 --
 -- level1_question.lua
--- Created by: Noah
--- Date: December 11th, 2019
--- Description: This is the level 1 question and the level 3 question because I currently don't have enough questions-----------------------------------------------------------------------------------------
+-- Created by: Daniel
+-- Date: December 14, 2019
+-- Description: Level4 screen
 
------------------------------------------------------------------------------------------
-
------------------------------------------------------------------------------------------
--- INITIALIZATIONS
------------------------------------------------------------------------------------------
 
 -- Use Composer Libraries
 local composer = require( "composer" )
@@ -57,8 +52,6 @@ local questionBox
 local firstNumber
 local question2Image
 
-local selectSound = audio.loadStream("Sounds/questionTheme.mp3")
-local selecSoundChannel
  
 -----------------------------------------------------------------------------------------
 --LOCAL FUNCTIONS
@@ -157,7 +150,6 @@ end
 local function DisplayQuestion()
     --creating random numbers
     firstNumber = math.random (1,3)
-    selecSoundChannel = audio.play(selectSound)
 
 if (firstNumber == 1) then
 

@@ -1,9 +1,8 @@
 ----------------------------------------------------------------------------------------
 --
 --  you_lose.lua
--- Created by: Noah
--- Date: December 11th, 2019
--- Description: This is the lose screen, displaying the lose text & back button.
+-- Created by: Daniel
+-- Description: The youlose screen
 -----------------------------------------------------------------------------------------
 display.setStatusBar(display.HiddenStatusBar)
 -----------------------------------------------------------------------------------------
