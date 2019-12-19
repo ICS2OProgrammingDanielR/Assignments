@@ -20,7 +20,7 @@ local physics = require( "physics")
 -----------------------------------------------------------------------------------------
 
 -- Naming Scene
-sceneName = "level2_Question"
+sceneName = "level4_Question"
 
 -----------------------------------------------------------------------------------------
 
@@ -68,7 +68,7 @@ local selecSoundChannel
 local function BackToLevel2() 
     
 
-composer.hideOverlay( "level2_Question", { isModal = true, effect = "fade", time = 500})
+composer.hideOverlay( "level4_Question", { isModal = true, effect = "fade", time = 500})
 
           
     ResumeGameLevel2()
@@ -77,7 +77,7 @@ end
 local function BackToLevel2_() 
     
 
-composer.hideOverlay( "level2_Question", { isModal = true, effect = "fade", time = 500})
+composer.hideOverlay( "level4_Question", { isModal = true, effect = "fade", time = 500})
 
           
     ResumeGame2Level2()

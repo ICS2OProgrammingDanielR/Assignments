@@ -1,9 +1,9 @@
------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------
 --
--- main_menu.lua
--- Created by: Noah
--- Date: November 20th, 2019
--- Description: This is the main menu, displaying the credits, instructions, play buttons and mute button.
+--  level_select.lua
+-- Created by: Daniel
+-- Date: December 18th, 2019
+-- Description: Level select
 -----------------------------------------------------------------------------------------
 display.setStatusBar(display.HiddenStatusBar)
 -----------------------------------------------------------------------------------------
@@ -21,102 +21,71 @@ local widget = require( "widget" )
 -----------------------------------------------------------------------------------------
 
 -- Naming Scene
-sceneName = "main_menu"
+sceneName = "level_select"
 
 -----------------------------------------------------------------------------------------
 
 -- Creating Scene Object
 local scene = composer.newScene( sceneName )
 
-
------------------------------------------------------------------------------------------
--- GLOBAL VARIABLES
------------------------------------------------------------------------------------------
-soundOn = true
-
-
 -----------------------------------------------------------------------------------------
 -- LOCAL VARIABLES
 -----------------------------------------------------------------------------------------
-
 local background
-local playButton
-local creditsButton
-local instructionsButton
-local muteButton
-local unMuteButton
-local border
+local backButton
+
 
 -----------------------------------------------------------------------------------------
 -- LOCAL SOUNDS
 -----------------------------------------------------------------------------------------
 
-
--- audio variables
 local transitionSound = audio.loadStream("Sounds/bop.mp3")
 local transitionSoundChannel
-local music = audio.loadStream("Sounds/mainMenu.mp3")
-local musicChannel = audio.play(music, {channel=1, loop = -1})
+local music = audio.loadStream("Sounds/creditsMusic.mp3")
+local musicChannel = audio.play(music, {channel=5, loop = -1})
 
 -----------------------------------------------------------------------------------------
 -- LOCAL FUNCTIONS
 -----------------------------------------------------------------------------------------
 
 
--- Creating Mute function to pause audio
-local function Mute( touch )
-    if (touch.phase == "ended") then
-        audio.pause(musicChannel)
-        soundOn = false
-        muteButton.isVisible = false
-        unMuteButton.isVisible = true
-    end
-end
-
-
--- Creating Mute function to pause audio
-local function UnMute( touch )
-    if (touch.phase == "ended") then
-        audio.resume(musicChannel)
-        soundOn = true
-        muteButton.isVisible = true
-        unMuteButton.isVisible = false
-    end
-end
-
-
-
-
--- Creating Transition to Level1 Screen
-local function LevelSelectTransition( )
-    composer.gotoScene( "level_select", {effect = "fade", time = 1000})
- 
-    if(soundOn == true)then
+-- Creating Transition to Main Menu Screen
+local function MainMenuTransition( )
+    composer.gotoScene( "main_menu", {effect = "slideDown", time = 1000})
+    
+if(soundOn == true)then
     transitionSoundChannel = audio.play(transitionSound)
-    end
-end    
-
--- Creating Transition to Instructions screen
-local function InstructionsTransition( )
-    composer.gotoScene( "instructions", {effect = "slideUp", time = 1000})
-    if(soundOn == true)then
-    transitionSoundChannel = audio.play(transitionSound)
-    end
+   end
 end    
 
 
---Creating Transition Function to Credits Page
-local function CreditsTransition( )       
-    composer.gotoScene( "credits_screen", {effect = "slideLeft", time = 500})
-  
+local function Level2Transition( )
+   composer.gotoScene( "level2_screen", {effect = "fade", time = 1000})
+    audio.stop()
+    
    if(soundOn == true)then
     transitionSoundChannel = audio.play(transitionSound)
-    end
-end 
------------------------------------------------------------------------------------------
+   end
+end    
+
+local function Level4Transition( )
+   composer.gotoScene( "level4_screen", {effect = "fade", time = 1000})
+    audio.stop()
+    
+    transitionSoundChannel = audio.play(transitionSound)
+end    
+-- fades in the buttons
+local function ButtonFade( event )
+    backButton.alpha = backButton.alpha + 0.006
+    level2Button.alpha = level2Button.alpha + 0.006
+    level4Button.alpha = level4Button.alpha + 0.006
+
+end
+
+----------------------------------------------------------------------------------------
 -- GLOBAL SCENE FUNCTIONS
 -----------------------------------------------------------------------------------------
-   
+
 -- The function called when the screen doesn't exist
 function scene:create( event )
 
@@ -126,103 +95,93 @@ function scene:create( event )
     -----------------------------------------------------------------------------------------
     -- BACKGROUND IMAGE & STATIC OBJECTS
     -----------------------------------------------------------------------------------------
+  -- creating the background
+    background = display.newImageRect("Images/LevelSelectScreenNoah@2x.png", display.contentWidth, display.contentHeight)
+    background.x = display.contentCenterX
+    background.y = display.contentCenterY
+    
 
-    -- Creating background and setting the image
-   background = display.newImageRect("Images/FakeMainMenuNoah@2x.png", display.contentWidth, display.contentHeight)
-   background.x = display.contentCenterX
-   background.y = display.contentCenterY
-  
-  
-    -- Associating display objects with this scene 
     sceneGroup:insert( background )
 
-    muteButton = display.newImageRect("Images/muteButtonUnpressed.png", 100, 100)
-    muteButton.x = 512
-    muteButton.y = 600
-    muteButton.isVisible = true
-
-    unMuteButton = display.newImageRect("Images/muteButtonPressed.png", 100, 100)
-    unMuteButton.x = 512
-    unMuteButton.y = 600
-    unMuteButton.isVisible = false
-
-    sceneGroup:insert( muteButton )
-    sceneGroup:insert( unMuteButton )
-    
    
+
+    
     -----------------------------------------------------------------------------------------
     -- BUTTON WIDGETS
     -----------------------------------------------------------------------------------------   
 
-
-    -- Creating Play Button
-    playButton = widget.newButton( 
+    -- Creating Back Button
+    backButton = widget.newButton( 
         {   
             -- Set its position on the screen relative to the screen size
-            x = display.contentWidth - 512,
-            y = display.contentHeight - 385,
-
+            x = display.contentWidth/2,
+            y = display.contentHeight - 100,
             width = 200,
-            height = 100,            
+            height = 100,
+          
+
+            
 
             -- Insert the images here
-            defaultFile = "Images/PlayButtonUnpressedDaniel@2x.png",
-            overFile = "Images/PlayButtonPressedDaniel@2x.png",
+            defaultFile = "Images/BackButtonUnpressedNoah@2x.png",
+            overFile = "Images/BackButtonPressedNoah@2x.png",
 
-            -- When the button is released, call the Level1 screen transition function
-            onRelease = LevelSelectTransition          
+            -- When the button is released, call the main menu screen transition function
+            onRelease = MainMenuTransition          
         } )
-    
-    -----------------------------------------------------------------------------------------
-    -- Creating Credits Button
-    creditsButton = widget.newButton( 
-        {
+       
+        backButton.alpha = 0
+
+
+-- Creating level1  Button
+    level2Button = widget.newButton( 
+        {   
             -- Set its position on the screen relative to the screen size
-           x = display.contentWidth - 174,
-           y = display.contentHeight - 150,
-
+            x = display.contentWidth/3 - 40,
+            y = display.contentHeight/2 - 50,
             width = 200,
-            height = 100,  
-            -- Insert the images here
-            defaultFile = "Images/CreditsButtonUnpressedNoah@2x.png",
-            overFile = "Images/CreditsButtonPressedNoah@2x.png",
-
-
-            -- When the button is released, call the Credits transition function
-            onRelease = CreditsTransition
-        } ) 
-   
-    
-    -- ADD INSTRUCTIONS BUTTON WIDGET
-
-
-    -- Creating instructions Button
-    instructionsButton = widget.newButton( 
-        {
-            -- Set its position on the screen relative to the screen size
-            x = display.contentWidth - 850,
-            y = display.contentHeight - 150,
-
-            width = 200,
-            height = 100,  
+            height = 125,
+            
 
             -- Insert the images here
-            defaultFile = "Images/InstructionsButtonUnpressedNoah@2x.png",
-            overFile = "Images/InstructionsButtonPressedNoah@2x.png",
+            defaultFile = "Images/level2ScreenTestDaniel@2x.png",
+            overFile = "Images/level2ScreenTestDaniel@2x.png",
 
-            -- When the button is released, call the Instructions transition function
-            onRelease = InstructionsTransition
-        } ) 
-   
+            -- When the button is released, call the level1 screen transition function
+            onRelease = Level2Transition          
+        } )
+       
+        level2Button.alpha = 0
+
+        -- Creating level3  Button
+    level4Button = widget.newButton( 
+        {   
+            -- Set its position on the screen relative to the screen size
+            x = display.contentWidth/3 - 40,
+            y = display.contentHeight/2 + 150,
+            width = 200,
+            height = 125,
+            
+
+            -- Insert the images here
+            defaultFile = "Images/Level4ScreenDaniel@2x.png",
+            overFile = "Images/Level4ScreenDaniel@2x.png",
+
+            -- When the button is released, call the level1 screen transition function
+            onRelease = Level4Transition          
+        } )
+       
+        level3Button.alpha = 0
+        
+       
     -----------------------------------------------------------------------------------------
+    
+    -----------------------------------------------------------------------------------------
+    sceneGroup:insert( backButton )
+    sceneGroup:insert( level1Button )
+    sceneGroup:insert( level3Button )
 
-    -- Associating button widgets with this scene
-    sceneGroup:insert( playButton )
-    sceneGroup:insert( creditsButton )
-    sceneGroup:insert( instructionsButton )
-
-
-end -- function scene:create( event )   
+end  
 
 
 
@@ -233,8 +192,7 @@ function scene:show( event )
 
     -- Creating a group that associates objects with the scene
     local sceneGroup = self.view
-    --plays background music loop
-    
+   
 
     -----------------------------------------------------------------------------------------
 
@@ -246,21 +204,19 @@ function scene:show( event )
     if ( phase == "will" ) then
        
     -----------------------------------------------------------------------------------------
-
+ Runtime:addEventListener("enterFrame", ButtonFade)
     -- Called when the scene is now on screen.
     -- Insert code here to make the scene come alive.
     -- Example: start timers, begin animation, play audio, etc.
-    elseif ( phase == "did" ) then       
-        -- plays music if sound on is true
-           muteButton:addEventListener("touch", Mute)
-        unMuteButton:addEventListener("touch", UnMute)
-        if (soundOn == true) then
-         
-            audio.resume(musicChannel)
-            unMuteButton.isVisible = false
-            muteButton.isVisible = true
+    elseif ( phase == "did" ) then 
        
-    end
+        if (soundOn == true) then
+            audio.resume(musicChannel)
+
+       
+                       
+        end
+       
 
     end
 
@@ -284,20 +240,13 @@ function scene:hide( event )
         -- Called when the scene is on screen (but is about to go off screen).
         -- Insert code here to "pause" the scene.
         -- Example: stop timers, stop animation, stop audio, etc.
-    --if ( soundOn == true) then
-          --musicChannel = audio.play(music, {loop = -1})
-    --end
-    audio.pause(musicChannel)
+        Runtime:removeEventListener( "enterFrame")
     -----------------------------------------------------------------------------------------
 
     elseif ( phase == "did" ) then
         -- Called immediately after scene goes off screen.
-
-        -- removes mute button listeners
-        
-        muteButton:removeEventListener("touch", Mute)
-        unMuteButton:removeEventListener("touch", UnMute)
-        
+    
+        audio.pause(musicChannel)
     end
 
 end -- function scene:hide( event )

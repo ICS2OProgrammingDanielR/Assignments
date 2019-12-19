@@ -21,7 +21,7 @@ local widget = require( "widget" )
 -----------------------------------------------------------------------------------------
 
 -- Naming Scene
-sceneName = "level2_screen"
+sceneName = "level4_screen"
 
 -----------------------------------------------------------------------------------------
 
@@ -41,7 +41,7 @@ local transitionSound = audio.loadStream("Sounds/bop.mp3")
 local goalSoundChannel
 local kickSound = audio.loadStream("Sounds/kick.mp3")
 local kickSoundChannel
-local winSound = audio.loadStream("Sounds/winwin.mp3")
+local winSound = audio.loadStream("Sounds/win2.mp3")
 local winSoundChannel
 local jumpSound = audio.loadStream("Sounds/jump2.mp3")
 local jumpSoundChannel
@@ -464,7 +464,7 @@ function scene:create( event )
     -- OBJECTS
     ----------------------------------------------------------------------------------------- 
 
-    background = display.newImageRect("Images/Level2ScreenDaniel@2x.png", display.contentWidth, display.contentHeight)
+    background = display.newImageRect("Images/Level4ScreenDaniel@2x.png", display.contentWidth, display.contentHeight)
     background.x = display.contentCenterX
     background.y = display.contentCenterY
 
@@ -543,21 +543,21 @@ function scene:create( event )
      sceneGroup:insert( characterRolling )
     sceneGroup:insert( characterJumping )
 
-  platform1 = display.newImageRect("Images/platformLevel2.png",200, 25)
+  platform1 = display.newImageRect("Images/platformLevel4.png",200, 25)
    platform1.x = display.contentCenterX
    platform1.y = display.contentCenterY - 200
 
     
     sceneGroup:insert( platform1 )
 
-  platform2 = display.newImageRect("Images/platformLevel2.png",200, 25)
+  platform2 = display.newImageRect("Images/platformLevel4.png",200, 25)
    platform2.x = display.contentCenterX + 300
    platform2.y = display.contentCenterY 
 
     
     sceneGroup:insert( platform2 )
 
-  platform3 = display.newImageRect("Images/platformLevel2.png",200, 25)
+  platform3 = display.newImageRect("Images/platformLevel4.png",200, 25)
    platform3.x = display.contentCenterX - 300
    platform3.y = display.contentCenterY 
 
