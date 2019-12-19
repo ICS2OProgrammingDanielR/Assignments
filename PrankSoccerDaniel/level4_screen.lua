@@ -35,13 +35,13 @@ local scene = composer.newScene( sceneName )
 local background
 local backButton
 local channel
-local music = audio.loadStream("Sounds/level2Music.mp3")
+local music = audio.loadStream("Sounds/level4Music.mp3")
 local channel2
 local transitionSound = audio.loadStream("Sounds/bop.mp3")
 local goalSoundChannel
 local kickSound = audio.loadStream("Sounds/kick.mp3")
 local kickSoundChannel
-local winSound = audio.loadStream("Sounds/winwin.mp3")
+local winSound = audio.loadStream("Sounds/win4.mp3")
 local winSoundChannel
 local jumpSound = audio.loadStream("Sounds/jump2.mp3")
 local jumpSoundChannel
@@ -216,7 +216,7 @@ local function onCollision( self, event )
 
 
             -- show overlay with math question
-            composer.showOverlay( "level2_Question", { isModal = true, effect = "fade", time = 500})
+            composer.showOverlay( "level4_Question", { isModal = true, effect = "fade", time = 500})
 
             -- Increment questions answered
             --questionsAnswered = questionsAnswered + 1
@@ -464,7 +464,7 @@ function scene:create( event )
     -- OBJECTS
     ----------------------------------------------------------------------------------------- 
 
-    background = display.newImageRect("Images/Level2ScreenDaniel@2x.png", display.contentWidth, display.contentHeight)
+    background = display.newImageRect("Images/Level4ScreenDaniel@2x.png", display.contentWidth, display.contentHeight)
     background.x = display.contentCenterX
     background.y = display.contentCenterY
 
