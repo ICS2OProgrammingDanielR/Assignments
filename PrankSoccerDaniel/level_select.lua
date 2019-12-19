@@ -41,7 +41,7 @@ local backButton
 
 local transitionSound = audio.loadStream("Sounds/bop.mp3")
 local transitionSoundChannel
-local music = audio.loadStream("Sounds/creditsMusic.mp3")
+local music = audio.loadStream("Sounds/d.mp3")
 local musicChannel = audio.play(music, {channel=5, loop = -1})
 
 -----------------------------------------------------------------------------------------
@@ -137,15 +137,15 @@ function scene:create( event )
     level2Button = widget.newButton( 
         {   
             -- Set its position on the screen relative to the screen size
-            x = display.contentWidth/3 - 40,
+            x = display.contentWidth/1.36 - 40,
             y = display.contentHeight/2 - 50,
             width = 200,
             height = 125,
             
 
             -- Insert the images here
-            defaultFile = "Images/level2ScreenTestDaniel@2x.png",
-            overFile = "Images/level2ScreenTestDaniel@2x.png",
+            defaultFile = "Images/Level2ScreenDaniel@2x.png",
+            overFile = "Images/Level2ScreenDaniel@2x.png",
 
             -- When the button is released, call the level1 screen transition function
             onRelease = Level2Transition          
@@ -157,7 +157,7 @@ function scene:create( event )
     level4Button = widget.newButton( 
         {   
             -- Set its position on the screen relative to the screen size
-            x = display.contentWidth/3 - 40,
+            x = display.contentWidth/1.36 - 40,
             y = display.contentHeight/2 + 150,
             width = 200,
             height = 125,
@@ -171,15 +171,15 @@ function scene:create( event )
             onRelease = Level4Transition          
         } )
        
-        level3Button.alpha = 0
+        level4Button.alpha = 0
         
        
     -----------------------------------------------------------------------------------------
     
     -----------------------------------------------------------------------------------------
     sceneGroup:insert( backButton )
-    sceneGroup:insert( level1Button )
-    sceneGroup:insert( level3Button )
+    sceneGroup:insert( level2Button )
+    sceneGroup:insert( level4Button )
 
 end  
 

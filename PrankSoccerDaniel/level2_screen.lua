@@ -21,7 +21,7 @@ local widget = require( "widget" )
 -----------------------------------------------------------------------------------------
 
 -- Naming Scene
-sceneName = "level4_screen"
+sceneName = "level2_screen"
 
 -----------------------------------------------------------------------------------------
 
@@ -159,16 +159,16 @@ end
 local function ChangeScore2( )
  
   if (goal_ == 2)then
-    goalOpponentText.text = "-1"
+    goalOpponentText.text = "1"
     upButton.isVisible = false
     rightButton.isVisible = false
     leftButton.isVisible = false
     
 
   elseif (goal_ == 4)then
-    goalOpponentText.text = "-2"
+    goalOpponentText.text = "2"
   elseif (goal_ == 6)then
-    goalOpponentText.text = "-3"
+    goalOpponentText.text = "3"
      composer.gotoScene( "you_lose", {effect = "crossFade", time = 1000})
   end
 end
@@ -464,7 +464,7 @@ function scene:create( event )
     -- OBJECTS
     ----------------------------------------------------------------------------------------- 
 
-    background = display.newImageRect("Images/Level4ScreenDaniel@2x.png", display.contentWidth, display.contentHeight)
+    background = display.newImageRect("Images/Level2ScreenDaniel@2x.png", display.contentWidth, display.contentHeight)
     background.x = display.contentCenterX
     background.y = display.contentCenterY
 
@@ -543,21 +543,21 @@ function scene:create( event )
      sceneGroup:insert( characterRolling )
     sceneGroup:insert( characterJumping )
 
-  platform1 = display.newImageRect("Images/platformLevel4.png",200, 25)
+  platform1 = display.newImageRect("Images/platformLevel2.png",200, 25)
    platform1.x = display.contentCenterX
    platform1.y = display.contentCenterY - 200
 
     
     sceneGroup:insert( platform1 )
 
-  platform2 = display.newImageRect("Images/platformLevel4.png",200, 25)
+  platform2 = display.newImageRect("Images/platformLevel2.png",200, 25)
    platform2.x = display.contentCenterX + 300
    platform2.y = display.contentCenterY 
 
     
     sceneGroup:insert( platform2 )
 
-  platform3 = display.newImageRect("Images/platformLevel4.png",200, 25)
+  platform3 = display.newImageRect("Images/platformLevel2.png",200, 25)
    platform3.x = display.contentCenterX - 300
    platform3.y = display.contentCenterY 
 
