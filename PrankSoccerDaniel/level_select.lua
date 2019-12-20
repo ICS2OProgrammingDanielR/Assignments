@@ -56,11 +56,29 @@ local function MainMenuTransition( )
 if(soundOn == true)then
     transitionSoundChannel = audio.play(transitionSound)
    end
-end    
+end  
+
+local function Level1Transition( )
+   composer.gotoScene( "level1_screen", {effect = "fade", time = 1000})
+    audio.stop()
+    
+   if(soundOn == true)then
+    transitionSoundChannel = audio.play(transitionSound)
+   end
+end      
 
 
 local function Level2Transition( )
    composer.gotoScene( "level2_screen", {effect = "fade", time = 1000})
+    audio.stop()
+    
+   if(soundOn == true)then
+    transitionSoundChannel = audio.play(transitionSound)
+   end
+end    
+
+local function Level3Transition( )
+   composer.gotoScene( "level3_screen", {effect = "fade", time = 1000})
     audio.stop()
     
    if(soundOn == true)then
@@ -77,8 +95,11 @@ end
 -- fades in the buttons
 local function ButtonFade( event )
     backButton.alpha = backButton.alpha + 0.006
+    level1Button.alpha = level4Button.alpha + 0.006
     level2Button.alpha = level2Button.alpha + 0.006
+    level3Button.alpha = level4Button.alpha + 0.006
     level4Button.alpha = level4Button.alpha + 0.006
+
 
 end
 
@@ -93,7 +114,7 @@ function scene:create( event )
     local sceneGroup = self.view
 
     -----------------------------------------------------------------------------------------
-    -- BACKGROUND IMAGE & STATIC OBJECTS
+    -- OBJECT CREATION
     -----------------------------------------------------------------------------------------
   -- creating the background
     background = display.newImageRect("Images/LevelSelectScreenNoah@2x.png", display.contentWidth, display.contentHeight)
@@ -133,7 +154,7 @@ function scene:create( event )
         backButton.alpha = 0
 
 
--- Creating level1  Button
+-- Creating level 2  Button
     level2Button = widget.newButton( 
         {   
             -- Set its position on the screen relative to the screen size
@@ -157,7 +178,7 @@ function scene:create( event )
     level4Button = widget.newButton( 
         {   
             -- Set its position on the screen relative to the screen size
-            x = display.contentWidth/1.36 - 40,
+            x = display.contentWidth/1.5 - 40,
             y = display.contentHeight/2 + 150,
             width = 200,
             height = 125,
@@ -173,12 +194,53 @@ function scene:create( event )
        
         level4Button.alpha = 0
         
+     
+     -- Creating level 1  Button
+    level1Button = widget.newButton( 
+        {   
+            -- Set its position on the screen relative to the screen size
+            x = display.contentWidth/1.36 - 40,
+            y = display.contentHeight/2 + 150,
+            width = 200,
+            height = 125,
+            
+
+            -- Insert the images here
+            defaultFile = "Images/level1screenNoah@2x.png",
+            overFile = "Images/level1screenNoah@2x.png",
+
+            -- When the button is released, call the level1 screen transition function
+            onRelease = Level1Transition          
+        } )
        
+        level1Button.alpha = 0
+
+        -- Creating level 3  Button
+    level3Button = widget.newButton( 
+        {   
+            -- Set its position on the screen relative to the screen size
+            x = display.contentWidth/3 - 40,
+            y = display.contentHeight/2 + 150,
+            width = 200,
+            height = 125,
+            
+
+            -- Insert the images here
+            defaultFile = "Images/Level3ScreenNoah@2x.png",
+            overFile = "Images/Level3ScreenNoah@2x.png",
+
+            -- When the button is released, call the level1 screen transition function
+            onRelease = Level3Transition          
+        } )
+       
+        level3Button.alpha = 0  
     -----------------------------------------------------------------------------------------
     
     -----------------------------------------------------------------------------------------
     sceneGroup:insert( backButton )
+    sceneGroup:insert( level1Button )
     sceneGroup:insert( level2Button )
+    sceneGroup:insert( level3Button )
     sceneGroup:insert( level4Button )
 
 end  
