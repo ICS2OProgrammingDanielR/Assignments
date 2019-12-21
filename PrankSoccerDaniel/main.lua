@@ -16,4 +16,4 @@ local composer = require( "composer" )
 -----------------------------------------------------------------------------------------
 
 -- Tansitioning to the menu screen
-composer.gotoScene( "level_select" )
+composer.gotoScene( "splash_screen" )

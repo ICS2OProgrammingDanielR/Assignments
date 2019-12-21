@@ -2,7 +2,7 @@
 --
 -- main_menu.lua
 -- Created by: Daniel
--- Description: This is the level 1 screen
+-- Description: This is the level 3 screen
 -----------------------------------------------------------------------------------------
 display.setStatusBar(display.HiddenStatusBar)
 -----------------------------------------------------------------------------------------
@@ -20,7 +20,7 @@ local widget = require( "widget" )
 -----------------------------------------------------------------------------------------
 
 -- Naming Scene
-sceneName = "level1_screen"
+sceneName = "level3_screen"
 
 -----------------------------------------------------------------------------------------
 
@@ -67,7 +67,7 @@ function scene:create( event )
     -- BACKGROUND IMAGE & STATIC OBJECTS
     ----------------------------------------------------------------------------------------- 
 
-    background = display.newImageRect("Images/level1screenNoah@2x.png", display.contentWidth, display.contentHeight)
+    background = display.newImageRect("Images/level3ScreenNoah@2x.png", display.contentWidth, display.contentHeight)
    background.x = display.contentCenterX
    background.y = display.contentCenterY
 

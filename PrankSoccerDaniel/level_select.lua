@@ -178,7 +178,7 @@ function scene:create( event )
     level4Button = widget.newButton( 
         {   
             -- Set its position on the screen relative to the screen size
-            x = display.contentWidth/1.5 - 40,
+            x = display.contentWidth/1.36 - 40,
             y = display.contentHeight/2 + 150,
             width = 200,
             height = 125,
@@ -199,8 +199,8 @@ function scene:create( event )
     level1Button = widget.newButton( 
         {   
             -- Set its position on the screen relative to the screen size
-            x = display.contentWidth/1.36 - 40,
-            y = display.contentHeight/2 + 150,
+            x = display.contentWidth/3 - 40,
+            y = display.contentHeight/2 - 50,
             width = 200,
             height = 125,
             
